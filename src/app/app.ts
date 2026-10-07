@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { TranslationService } from './core/i18n/translation.service';
 
 @Component({
@@ -7,10 +7,9 @@ import { TranslationService } from './core/i18n/translation.service';
   templateUrl: './app.html',
 })
 export class App {
+  protected readonly translation = inject(TranslationService);
   protected readonly isMenuOpen = signal(false);
   protected readonly openFaq = signal<number | null>(null);
-
-  constructor(protected readonly translation: TranslationService) {}
 
   protected get t() {
     return this.translation.text;
